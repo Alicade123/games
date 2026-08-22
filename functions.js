@@ -4,9 +4,7 @@ const numberGenerator =()=>{
 
 let previousNumber = 0;
 let currentNumber = 0;
-
-let different =0;
-let answer = 0;
+let score = 0;
 
 previousNumber = Math.floor(Math.random() * 10);
 currentNumber = Math.floor(Math.random() * 10);
@@ -14,28 +12,28 @@ currentNumber = Math.floor(Math.random() * 10);
 //Show the initial numbers to the user
 console.log("Previous Number: " + previousNumber);
 
-do{ 
-if(previousNumber >= currentNumber){
-    different = previousNumber - currentNumber;
-}
-else{
-    different = currentNumber - previousNumber;
-}
+while(true){
+let different = Math.abs(previousNumber - currentNumber);
 
-
+//Show the current number to the user
 console.log("Current Number: " + currentNumber);
-// console.log("Difference: " + different);
+
 
 // Read input synchronously 
-answer = prompt('Enter answer: ');
-// console.log("Your Answer: " + answer);
+let answer = Number(prompt('Enter answer: '));
+
+
+// Check answer against the correct difference
+    if (answer !== different) {
+      break; // Exit the loop instantly on a wrong answer
+    }
 
 //update the variables for the next iteration
 previousNumber = currentNumber;
 currentNumber = Math.floor(Math.random() * 10);
-
-}while(answer == different);
-return "Game Over! Your answer is incorrect.";
+score++;
+}
+return `Game Over! Your answer is incorrect. Final score: ${score}`;
 
 }
 console.log(numberGenerator());
