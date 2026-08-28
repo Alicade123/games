@@ -1,8 +1,21 @@
+// ===============================
+// GAME STATE
+// ===============================
+
 let previousNumber = 0;
 let currentNumber = 0;
 let score = 0;
 
-// Get HTML elements
+let gameRunning = false;
+
+let timeLimit = 0;
+let timeRemaining = 0;
+let timer = null;
+
+// ===============================
+// DOM ELEMENTS
+// ===============================
+
 const previousNumberElement = document.getElementById("previousNumber");
 
 const currentNumberElement = document.getElementById("currentNumber");
@@ -15,49 +28,197 @@ const messageElement = document.getElementById("message");
 
 const scoreElement = document.getElementById("score");
 
-// Generate initial numbers
-previousNumber = Math.floor(Math.random() * 10);
+const startButton = document.getElementById("startButton");
 
-currentNumber = Math.floor(Math.random() * 10);
+const timeLimitElement = document.getElementById("timeLimit");
 
-// Display initial numbers
-previousNumberElement.textContent = previousNumber;
+const timerElement = document.getElementById("timer");
 
-currentNumberElement.textContent = currentNumber;
+// ===============================
+// START GAME
+// ===============================
 
-// Listen for button click
-submitButton.addEventListener("click", checkAnswer);
+function startGame() {
+  // Stop any previous timer
+  clearInterval(timer);
 
-// Check player's answer
-function checkAnswer() {
-  const different = Math.abs(previousNumber - currentNumber);
+  // Get selected time
+  timeLimit = Number(timeLimitElement.value);
 
-  const answer = Number(answerInput.value);
+  timeRemaining = timeLimit;
 
-  // Wrong answer
-  if (answer !== different) {
-    messageElement.textContent = "Wrong answer! Game Over.";
-
-    return;
-  }
-
-  // Correct answer
-  score++;
-
-  scoreElement.textContent = score;
-
-  messageElement.textContent = "Correct!";
-
-  // Generate next round
-  previousNumber = currentNumber;
+  // Generate numbers
+  previousNumber = Math.floor(Math.random() * 10);
 
   currentNumber = Math.floor(Math.random() * 10);
 
-  // Update browser
+  // Reset score
+  score = 0;
+
+  gameRunning = true;
+
+  // Enable game controls
+  answerInput.disabled = false;
+  submitButton.disabled = false;
+
+  // Update button
+  startButton.textContent = "Restart Game";
+
+  // Reset message
+  messageElement.textContent = "";
+
+  // Clear input
+  answerInput.value = "";
+
+  // Start timer if time limit exists
+  if (timeLimit > 0) {
+    timerElement.textContent = formatTime(timeRemaining);
+
+    timer = setInterval(updateTimer, 1000);
+  } else {
+    timerElement.textContent = "∞";
+  }
+
+  updateGameUI();
+
+  answerInput.focus();
+}
+
+// ===============================
+// UPDATE UI
+// ===============================
+
+function updateGameUI() {
   previousNumberElement.textContent = previousNumber;
 
   currentNumberElement.textContent = currentNumber;
 
-  // Clear input
-  answerInput.value = "";
+  scoreElement.textContent = score;
 }
+
+// ===============================
+// CHECK ANSWER
+// ===============================
+
+function checkAnswer() {
+
+    if (!gameRunning) {
+        return;
+    }
+
+    const different =
+        Math.abs(previousNumber - currentNumber);
+
+    const answer =
+        Number(answerInput.value);
+
+
+    // ===============================
+    // WRONG ANSWER
+    // ===============================
+
+    if (answer !== different) {
+
+        // Timed game:
+        // Wrong answer does NOT end the game
+        if (timeLimit > 0) {
+
+            messageElement.textContent =
+                "Wrong answer!";
+
+            answerInput.value = "";
+
+            return;
+        }
+
+
+        // No Time Limit:
+        // Wrong answer ends the game
+        endGame("wrong");
+
+        return;
+    }
+
+
+    // ===============================
+    // CORRECT ANSWER
+    // ===============================
+
+    score++;
+
+    previousNumber =
+        currentNumber;
+
+    currentNumber =
+        Math.floor(Math.random() * 10);
+
+    messageElement.textContent =
+        "Correct!";
+
+    answerInput.value = "";
+
+    updateGameUI();
+
+    answerInput.focus();
+}
+
+// ===============================
+// TIMER
+// ===============================
+
+function updateTimer() {
+  if (!gameRunning) {
+    return;
+  }
+
+  timeRemaining--;
+
+  timerElement.textContent = formatTime(timeRemaining);
+
+  if (timeRemaining <= 0) {
+    endGame("time");
+  }
+}
+
+// ===============================
+// FORMAT TIME
+// ===============================
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+
+  const remainingSeconds = seconds % 60;
+
+  return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+}
+
+// ===============================
+// END GAME
+// ===============================
+
+function endGame(reason) {
+  gameRunning = false;
+
+  clearInterval(timer);
+
+  answerInput.disabled = true;
+  submitButton.disabled = true;
+
+  if (reason === "time") {
+    messageElement.textContent = `Time's Up! Final Score: ${score}`;
+
+    timerElement.textContent = "00:00";
+  }
+
+  if (reason === "wrong") {
+    messageElement.textContent = `Wrong Answer! Game Over. Final Score: ${score}`;
+  }
+}
+
+// ===============================
+// EVENTS
+// ===============================
+
+startButton.addEventListener("click", startGame);
+
+submitButton.addEventListener("click", checkAnswer);
