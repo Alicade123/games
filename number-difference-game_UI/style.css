@@ -1,0 +1,333 @@
+/* ===============================
+   RESET
+================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ===============================
+   PAGE
+================================ */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f6f8;
+    color: #1f2937;
+}
+
+
+/* ===============================
+   MAIN CONTAINER
+================================ */
+
+main {
+    width: min(90%, 600px);
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+
+/* ===============================
+   HEADINGS
+================================ */
+
+h1 {
+    margin-bottom: 30px;
+
+    font-size: 32px;
+}
+
+
+/* ===============================
+   START SCREEN
+================================ */
+
+#startScreen {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+#startScreen label {
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+
+#startScreen select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    background: white;
+}
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+button {
+    padding: 12px 24px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #2563eb;
+
+    color: white;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+}
+
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+
+button:active {
+    transform: translateY(0);
+}
+
+
+button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.5;
+
+    transform: none;
+}
+
+
+/* ===============================
+   GAME SCREEN
+================================ */
+
+#gameScreen {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* ===============================
+   GAME HEADER
+================================ */
+
+.game-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+#timer {
+    font-size: 24px;
+}
+
+
+#score {
+    font-size: 24px;
+}
+
+
+/* ===============================
+   NUMBERS
+================================ */
+
+.numbers {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+.number-card {
+    width: 150px;
+    height: 120px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 16px;
+
+    background: #f3f4f6;
+
+    font-size: 48px;
+
+    font-weight: bold;
+}
+
+
+.number-separator {
+    font-size: 32px;
+
+    font-weight: bold;
+}
+
+
+/* ===============================
+   ANSWER AREA
+================================ */
+
+.answer-area {
+    display: flex;
+
+    gap: 10px;
+}
+
+
+#answerInput {
+    flex: 1;
+
+    padding: 14px;
+
+    border: 2px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+
+    text-align: center;
+
+    outline: none;
+}
+
+
+#answerInput:focus {
+    border-color: #2563eb;
+}
+
+
+/* ===============================
+   MESSAGE
+================================ */
+
+#message {
+    min-height: 24px;
+
+    font-weight: bold;
+
+    font-size: 17px;
+}
+
+
+/* ===============================
+   GAME OVER
+================================ */
+
+#gameOverScreen {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+#gameOverScreen h1 {
+    margin-bottom: 0;
+}
+
+
+#finalScore {
+    font-size: 32px;
+
+    font-weight: bold;
+}
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 500px) {
+
+    main {
+        padding: 25px;
+    }
+
+
+    h1 {
+        font-size: 26px;
+    }
+
+
+    .numbers {
+        gap: 15px;
+    }
+
+
+    .number-card {
+        width: 110px;
+        height: 90px;
+
+        font-size: 36px;
+    }
+
+
+    .answer-area {
+        flex-direction: column;
+    }
+
+
+    .answer-area button {
+        width: 100%;
+    }
+}
