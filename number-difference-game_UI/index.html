@@ -4,32 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Number Difference</title>
+    <title>Number Difference Game</title>
   </head>
 
   <body>
-    <h1>Number Difference</h1>
+    <main>
+      <h1>Number Difference Game</h1>
 
-    <p>
-      Previous Number:
-      <span id="previousNumber"></span>
-    </p>
+      <!-- Time Selection -->
+      <div id="timeSelection">
+        <label for="timeLimit"> Choose Time: </label>
 
-    <p>
-      Current Number:
-      <span id="currentNumber"></span>
-    </p>
+        <select id="timeLimit">
+          <option value="30">30 Seconds</option>
+          <option value="60">60 Seconds</option>
+          <option value="120">2 Minutes</option>
+          <option value="0">No Time Limit</option>
+        </select>
+      </div>
 
-    <input type="number" id="answerInput" placeholder="Enter answer" />
+      <!-- Start / Restart -->
+      <button id="startButton">Start Game</button>
 
-    <button id="submitButton">Submit</button>
+      <!-- Timer -->
+      <p>
+        Time:
+        <span id="timer">--</span>
+      </p>
 
-    <p id="message"></p>
+      <!-- Game -->
+      <section id="game">
+        <div>
+          <p>Previous Number</p>
+          <span id="previousNumber">-</span>
+        </div>
 
-    <p>
-      Score:
-      <span id="score">0</span>
-    </p>
+        <div>
+          <p>Current Number</p>
+          <span id="currentNumber">-</span>
+        </div>
+
+        <div>
+          <input
+            type="number"
+            id="answerInput"
+            placeholder="Enter difference"
+            disabled
+          />
+
+          <button id="submitButton" disabled>Submit</button>
+        </div>
+
+        <p id="message"></p>
+
+        <p>
+          Score:
+          <span id="score">0</span>
+        </p>
+      </section>
+    </main>
 
     <script src="script.js"></script>
   </body>
