@@ -3,64 +3,111 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="stylesheet" href="style.css" />
     <title>Number Difference Game</title>
   </head>
 
   <body>
     <main>
-      <h1>Number Difference Game</h1>
+      <!-- =========================
+             START SCREEN
+        ========================== -->
 
-      <!-- Time Selection -->
-      <div id="timeSelection">
-        <label for="timeLimit"> Choose Time: </label>
+      <section id="startScreen">
+        <h1>Number Difference Game</h1>
 
-        <select id="timeLimit">
-          <option value="30">30 Seconds</option>
-          <option value="60">60 Seconds</option>
-          <option value="120">2 Minutes</option>
-          <option value="0">No Time Limit</option>
-        </select>
-      </div>
-
-      <!-- Start / Restart -->
-      <button id="startButton">Start Game</button>
-
-      <!-- Timer -->
-      <p>
-        Time:
-        <span id="timer">--</span>
-      </p>
-
-      <!-- Game -->
-      <section id="game">
         <div>
-          <p>Previous Number</p>
-          <span id="previousNumber">-</span>
+          <label for="timeLimit"> Choose Time: </label>
+
+          <select id="timeLimit">
+            <option value="30">30 Seconds</option>
+            <option value="60">60 Seconds</option>
+            <option value="120">2 Minutes</option>
+            <option value="0">No Time Limit</option>
+          </select>
         </div>
 
-        <div>
-          <p>Current Number</p>
-          <span id="currentNumber">-</span>
-        </div>
+        <br />
 
         <div>
+          <label for="difficulty"> Difficulty: </label>
+
+          <select id="difficulty">
+            <option value="9">Easy (0–9)</option>
+            <option value="100">Medium (0–100)</option>
+            <option value="1000">Hard (0–1000)</option>
+          </select>
+        </div>
+
+        <br />
+
+        <button id="startButton">Start Game</button>
+      </section>
+
+      <!-- =========================
+             GAME SCREEN
+        ========================== -->
+
+      <section id="gameScreen" hidden>
+        <h1>Number Difference</h1>
+
+        <div class="game-info">
+          <div>
+            Time:
+            <span id="timer">--</span>
+          </div>
+
+          <div>
+            Score:
+            <span id="score">0</span>
+          </div>
+        </div>
+
+        <div class="numbers">
+          <div class="number-card">
+            <span id="previousNumber">-</span>
+          </div>
+
+          <div class="number-separator">−</div>
+
+          <div class="number-card">
+            <span id="currentNumber">-</span>
+          </div>
+        </div>
+
+        <p>What's the difference?</p>
+
+        <div class="answer-area">
           <input
             type="number"
             id="answerInput"
             placeholder="Enter difference"
-            disabled
+            min="0"
+            step="1"
+            autocomplete="off"
           />
 
-          <button id="submitButton" disabled>Submit</button>
+          <button id="submitButton">Check</button>
         </div>
 
         <p id="message"></p>
+      </section>
+
+      <!-- =========================
+             GAME OVER SCREEN
+        ========================== -->
+
+      <section id="gameOverScreen" hidden>
+        <h1>Game Over</h1>
+
+        <p id="gameOverMessage"></p>
 
         <p>
-          Score:
-          <span id="score">0</span>
+          Final Score:
+          <span id="finalScore">0</span>
         </p>
+
+        <button id="restartButton">Play Again</button>
       </section>
     </main>
 
