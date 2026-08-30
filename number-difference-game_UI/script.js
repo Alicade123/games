@@ -50,6 +50,50 @@ const gameOverMessage = document.getElementById("gameOverMessage");
 
 const finalScoreElement = document.getElementById("finalScore");
 
+const settingsButton = document.getElementById("settingsButton");
+
+const gameSettingsButton = document.getElementById("gameSettingsButton");
+
+const settingsPanel = document.getElementById("settingsPanel");
+
+settingsButton.addEventListener("click", () => {
+  settingsPanel.hidden = !settingsPanel.hidden;
+});
+
+// gameSettingsButton.addEventListener("click", () => {
+//   endGame("settings");
+// });
+
+gameSettingsButton.addEventListener("click", openSettings);
+function openSettings() {
+  clearInterval(timer);
+
+  gameRunning = false;
+
+  gameScreen.hidden = true;
+
+  startScreen.hidden = false;
+
+  settingsPanel.hidden = false;
+
+  startButton.textContent = "Start Game";
+}
+
+function showCorrectAnimation() {
+  gameScreen.classList.remove("correct");
+
+  void gameScreen.offsetWidth;
+
+  gameScreen.classList.add("correct");
+}
+
+function showWrongAnimation() {
+  gameScreen.classList.remove("wrong");
+
+  void gameScreen.offsetWidth;
+
+  gameScreen.classList.add("wrong");
+}
 // ===============================
 // NUMBER GENERATOR
 // ===============================
@@ -70,6 +114,8 @@ function startGame() {
   timeLimit = Number(timeLimitElement.value);
 
   timeRemaining = timeLimit;
+
+  timerElement.classList.remove("timer-warning");
 
   difficulty = Number(difficultyElement.value);
 
@@ -158,6 +204,8 @@ function checkAnswer() {
     // Wrong answer does NOT end game
 
     if (timeLimit > 0) {
+      showWrongAnimation();
+
       messageElement.textContent = "Wrong answer!";
 
       answerInput.value = "";
@@ -180,6 +228,8 @@ function checkAnswer() {
   // ===============================
 
   score++;
+
+  showCorrectAnimation();
 
   previousNumber = currentNumber;
 
@@ -207,7 +257,13 @@ function updateTimer() {
 
   timerElement.textContent = formatTime(timeRemaining);
 
+  if (timeRemaining <= 10) {
+    timerElement.classList.add("timer-warning");
+  }
+
   if (timeRemaining <= 0) {
+    timerElement.classList.remove("timer-warning");
+
     endGame("time");
   }
 }

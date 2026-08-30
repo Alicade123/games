@@ -12,12 +12,15 @@
       <!-- =========================
              START SCREEN
         ========================== -->
-
       <section id="startScreen">
         <h1>Number Difference Game</h1>
 
-        <div>
-          <label for="timeLimit"> Choose Time: </label>
+        <button id="settingsButton" class="icon-button">⚙</button>
+
+        <div id="settingsPanel" hidden>
+          <h2>Game Settings</h2>
+
+          <label for="timeLimit"> Time Limit </label>
 
           <select id="timeLimit">
             <option value="30">30 Seconds</option>
@@ -25,12 +28,8 @@
             <option value="120">2 Minutes</option>
             <option value="0">No Time Limit</option>
           </select>
-        </div>
 
-        <br />
-
-        <div>
-          <label for="difficulty"> Difficulty: </label>
+          <label for="difficulty"> Difficulty </label>
 
           <select id="difficulty">
             <option value="9">Easy (0–9)</option>
@@ -39,16 +38,14 @@
           </select>
         </div>
 
-        <br />
-
         <button id="startButton">Start Game</button>
       </section>
-
       <!-- =========================
              GAME SCREEN
         ========================== -->
 
       <section id="gameScreen" hidden>
+        <button id="gameSettingsButton" class="icon-button">⚙</button>
         <h1>Number Difference</h1>
 
         <div class="game-info">
