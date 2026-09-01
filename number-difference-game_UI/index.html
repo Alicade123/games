@@ -3,19 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="style.css" />
+
     <title>Number Difference Game</title>
   </head>
 
   <body>
     <main>
       <!-- =========================
-             START SCREEN
-        ========================== -->
+           START SCREEN
+      ========================== -->
+
       <section id="startScreen">
         <h1>Number Difference Game</h1>
 
-        <button id="settingsButton" class="icon-button">⚙</button>
+        <div class="game-header-actions">
+          <button id="settingsButton" class="icon-button" title="Settings">
+            ⚙
+          </button>
+
+          <button id="infoButtonStart" class="icon-button" title="Game Rules">
+            ⓘ
+          </button>
+        </div>
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
 
         <div id="settingsPanel" hidden>
           <h2>Game Settings</h2>
@@ -24,8 +39,11 @@
 
           <select id="timeLimit">
             <option value="30">30 Seconds</option>
+
             <option value="60">60 Seconds</option>
+
             <option value="120">2 Minutes</option>
+
             <option value="0">No Time Limit</option>
           </select>
 
@@ -33,20 +51,36 @@
 
           <select id="difficulty">
             <option value="9">Easy (0–9)</option>
+
             <option value="100">Medium (0–100)</option>
+
             <option value="1000">Hard (0–1000)</option>
           </select>
         </div>
 
         <button id="startButton">Start Game</button>
       </section>
+
       <!-- =========================
-             GAME SCREEN
-        ========================== -->
+           GAME SCREEN
+      ========================== -->
 
       <section id="gameScreen" hidden>
-        <button id="gameSettingsButton" class="icon-button">⚙</button>
+        <div class="game-header-actions">
+          <button id="gameSettingsButton" class="icon-button" title="Settings">
+            ⚙
+          </button>
+
+          <button id="infoButton" class="icon-button" title="Game Rules">
+            ⓘ
+          </button>
+        </div>
+
         <h1>Number Difference</h1>
+
+        <!-- =========================
+             GAME INFORMATION
+        ========================== -->
 
         <div class="game-info">
           <div>
@@ -60,19 +94,23 @@
           </div>
         </div>
 
-        <div class="numbers">
-          <div class="number-card">
-            <span id="previousNumber">-</span>
-          </div>
+        <!-- =========================
+             NUMBER DISPLAY
+        ========================== -->
 
-          <div class="number-separator">−</div>
-
+        <div class="number-display">
           <div class="number-card">
-            <span id="currentNumber">-</span>
+            <span id="displayedNumber"> - </span>
           </div>
         </div>
 
+        <p id="memoryMessage">Remember the number!</p>
+
         <p>What's the difference?</p>
+
+        <!-- =========================
+             ANSWER
+        ========================== -->
 
         <div class="answer-area">
           <input
@@ -82,6 +120,7 @@
             min="0"
             step="1"
             autocomplete="off"
+            disabled
           />
 
           <button id="submitButton">Check</button>
@@ -91,8 +130,8 @@
       </section>
 
       <!-- =========================
-             GAME OVER SCREEN
-        ========================== -->
+           GAME OVER SCREEN
+      ========================== -->
 
       <section id="gameOverScreen" hidden>
         <h1>Game Over</h1>
@@ -106,6 +145,67 @@
 
         <button id="restartButton">Play Again</button>
       </section>
+
+      <!-- =========================
+           GAME INFO MODAL
+      ========================== -->
+
+      <div id="infoModal" class="modal" hidden>
+        <div class="modal-content">
+          <button id="closeInfoButton" class="modal-close" title="Close">
+            ×
+          </button>
+
+          <h2>How to Play</h2>
+
+          <div class="rules">
+            <p>A number will appear for 2 seconds.</p>
+
+            <p>Remember that number.</p>
+
+            <p>
+              After 2 seconds, the number will disappear and a new number will
+              appear.
+            </p>
+
+            <p>
+              Calculate the difference between the number you saw and the
+              current number then type the difference.
+            </p>
+
+            <h3>Difficulty</h3>
+
+            <ul>
+              <li>
+                <strong>Easy:</strong>
+                0–9 — answer is checked automatically.
+              </li>
+
+              <li>
+                <strong>Medium:</strong>
+                0–100 — use Check button or Enter.
+              </li>
+
+              <li>
+                <strong>Hard:</strong>
+                0–1000 — use Check button or Enter.
+              </li>
+            </ul>
+
+            <h3>Game Over</h3>
+
+            <p>
+              In Time Limit mode, the game ends when the timer reaches zero.
+            </p>
+
+            <p>In Time Limit mode, a wrong answer does not end the game.</p>
+
+            <p>
+              In No Time Limit mode, a wrong answer ends the game immediately.
+            </p>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="script.js"></script>
