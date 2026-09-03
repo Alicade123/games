@@ -719,3 +719,12 @@ button:disabled {
     align-items: center;
     justify-content: center;
 }
+
+.info-heading
+{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    text-decoration: underline;
+   text-align: center;
+}
