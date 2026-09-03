@@ -15,6 +15,7 @@ let timer = null;
 let revealTimer = null;
 
 let difficulty = 9;
+let totalCounter = 0;
 
 // ===============================
 // DOM ELEMENTS
@@ -51,6 +52,8 @@ const difficultyElement = document.getElementById("difficulty");
 const gameOverMessage = document.getElementById("gameOverMessage");
 
 const finalScoreElement = document.getElementById("finalScore");
+
+const totalQuestionsElement = document.getElementById("totalQuestions");
 
 const settingsButton = document.getElementById("settingsButton");
 
@@ -178,6 +181,8 @@ function startGame() {
   // ===============================
   // RESET GAME STATE
   // ===============================
+
+  totalCounter = 0;
 
   score = 0;
 
@@ -335,6 +340,8 @@ function checkAnswer() {
   const different = Math.abs(previousNumber - currentNumber);
 
   const answer = Number(inputValue);
+ 
+   totalCounter++;
 
   // ===============================
   // CORRECT ANSWER
@@ -492,6 +499,8 @@ function endGame(reason) {
   gameOverScreen.hidden = false;
 
   finalScoreElement.textContent = score;
+
+  totalQuestionsElement.textContent = totalCounter;
 
   // ===============================
   // TIME UP

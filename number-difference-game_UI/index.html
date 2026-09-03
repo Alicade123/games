@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="style.css" />
 
-    <title>Number Difference Game</title>
+    <title>Adaptive Sequence Challenge</title>
   </head>
 
   <body>
@@ -16,7 +16,7 @@
       ========================== -->
 
       <section id="startScreen">
-        <h1>Number Difference Game</h1>
+        <h1>Adaptive Sequence Challenge</h1>
 
         <div class="game-header-actions">
           <button id="settingsButton" class="icon-button" title="Settings">
@@ -45,6 +45,14 @@
             <option value="120">2 Minutes</option>
 
             <option value="0">No Time Limit</option>
+
+            <option >10 Points</option>
+
+            <option >100 Points</option>
+
+            <option >500 Points</option>
+
+            <option >1000 Points</option>
           </select>
 
           <label for="difficulty"> Difficulty </label>
@@ -76,7 +84,7 @@
           </button>
         </div>
 
-        <h1>Number Difference</h1>
+        <h1>Adaptive Sequence Challenge</h1>
 
         <!-- =========================
              GAME INFORMATION
@@ -106,7 +114,6 @@
 
         <p id="memoryMessage">Remember the number!</p>
 
-        <p>What's the difference?</p>
 
         <!-- =========================
              ANSWER
@@ -141,6 +148,8 @@
         <p>
           Final Score:
           <span id="finalScore">0</span>
+          <span >out of</span>
+          <span id="totalQuestions">0</span>
         </p>
 
         <button id="restartButton">Play Again</button>
@@ -156,7 +165,7 @@
             ×
           </button>
 
-          <h2>How to Play</h2>
+          <h2 class="info-heading">How to Play</h2>
 
           <div class="rules">
             <p>A number will appear for 2 seconds.</p>
